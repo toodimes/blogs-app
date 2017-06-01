@@ -1,0 +1,188 @@
+<%# form_tag "/users/sign_out", method: :delete do %>
+  <!-- <button class="btn btn-danger" type="submit">Sign Out</button> -->
+<%# end %> 
+<!-- <a href="/users/sign_up"><button class="btn btn-primary">Sign Up</button></a>
+<a href="/users/sign_in"><button class="btn btn-primary">Sign In</button></a>
+<a href="/post/new"><button class="btn btn-warning">New Blog Post</button></a> -->
+<!--WIDGET SECTION-->
+<section class="dark_section bg_image">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h2 class="block-header">Widget</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="block col-sm-3 widget_news">
+        <h3>Popular Posts</h3>
+        <ul>
+        <% @popular_posts.each do |post| %>
+          <li class="item">
+            <span class="news_introimg">
+              <a href="">
+                <img alt="" src="">
+              </a>
+            </span>
+            <div class="news_right">
+              <span class="news-date"><%= post.created_at.strftime("%A, %b %d") %></span>
+              <h5> 
+                <a href="/post/<%= post.id %>"> 
+              <% if post.title.length > 20 %>
+                  <%= post.title[0..20] %>...
+              <% else %>
+                  <%= post.title %>
+              <% end %>
+                </a>
+              </h5>
+            </div>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+
+
+<!--       <div class="block col-sm-3 widget_archive">
+        <h3>Blog Archives</h3>
+        <ul>
+          <li><a href="#">July 2013</a></li>
+          <li><a href="#">June 2013</a></li>
+          <li><a href="#">May 2013</a></li>
+          <li><a href="#">April 2013</a></li>
+          <li><a href="#">March 2013</a></li>
+        </ul>
+      </div> -->
+
+      <div class="block col-sm-6 widget_recent_entries">    
+        <h3 class="widget-title">Recent Posts</h3>    
+        <ol class="">
+        <% @recent_posts.each do |post| %>
+          <li>
+            <a href="/post/<%= post.id %>">
+            <% if post.title.length > 55 %>
+              <%= post.title[0..55] %>...
+            <% else %>
+              <%= post.title %>
+            <% end %>
+            </a>
+            <span class="post-date"><%= post.created_at.strftime("%A, %b %d") %></span>
+          </li>
+        <% end %>
+        </ol>
+      </div>
+
+
+      <div class="block col-sm-3 widget_categories">
+        <h3>Post Categories</h3>
+        <ul>
+          <li class="cat-item"><a href="#">Graphic Design</a> (3)</li>
+          <li class="cat-item"><a href="#">Icon Desgin</a> (7)</li>
+          <li class="cat-item"><a href="#">Interactive Media</a> (1)</li>
+          <li class="cat-item"><a href="#">Photography</a> (2)</li>
+          <li class="cat-item"><a href="#">Web Design</a> (4)</li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="row">
+
+      <div class="block widget_nav_menu col-sm-3">
+        <h3>Custom Menu</h3>
+        <ul class="nav menu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Services</a></li>
+          <li><a href="#">Contuct Us</a></li>
+        </ul>
+      </div>
+
+      <div class="block col-sm-3 widget_search block">
+        <h3>Search</h3>
+        <form role="search" action="/" method="post" class="form-inline search-form">
+          <div class="form-group">
+            <input type="search" class="form-control search-field" placeholder="Site search">
+          </div>
+          <button type="submit" class="theme_btn">GO!</button>
+        </form>
+      </div>
+
+
+      <div class="block col-sm-3 subscribe">
+        <h3>Newsletter Subscribe</h3>
+        <p>Subscribe to our e-mail newsletter to receive our news and updates.</p>
+        <form id="signup" action="/" method="get" class="form-inline">
+          <div class="form-group">
+            <input name="email" id="email" type="email" class="form-control" placeholder="your@email.com">
+          </div>
+          <button type="submit" class="theme_btn">GO!</button>
+          <div id="response"></div>
+        </form>
+      </div>
+
+      <div class="block col-sm-3 widget_tag_cloud">
+        <h3>Tags</h3>
+        <div class="tagcloud">
+          <a href="#" class="tag-link">Graphic Design</a>
+          <a href="#" class="tag-link">Photography</a>
+          <a href="#" class="tag-link">Design</a>
+          <a href="#" class="tag-link">Media</a>
+          <a href="#" class="tag-link">Typography</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      
+      <div class="block widget_schedule col-sm-4">
+        <h3>Opening Hours</h3>
+        <dl class="dl-horizontal">
+          <dt>Monday-Friday</dt>
+          <dd>05:00 AM - 10:00 PM</dd>
+          <dt>Saturday</dt>
+          <dd>05:00 AM - 9:00 PM</dd>
+          <dt>Sunday</dt>
+          <dd>CLOSED</dd>
+        </dl>
+      </div>
+
+      <div class="block col-sm-4">
+        <h3>Flickr Widget</h3>
+        <ul id="flickr"></ul>
+      </div>
+
+      <div class="block col-sm-4 widget_tweet">
+        <h3>Our Twitter</h3>
+        <div class="twitter"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="row">
+    <% @posts.each do |post| %>
+    <!-- <div class="well"> -->
+      <div class="col-md-4">
+        <!-- <div class="score" style="float:left">
+          <p><a href="">Upvote</a></p>
+          <p><%# post.score %></p>
+          <p><a href="">Downvote</a></p>
+        </div> -->
+        <a href="/post/<%= post.id %>"><h2><%= post.title %></h2></a>
+        <p>Author: <%= post.user.name %></p>
+        <p>
+        <% if post.content.length > 150 %>  
+          <%= post.content[0..150] %>...
+        <% else %>
+          <%= post.content %>
+        <% end %>
+        </p>
+        <p>Blog number: <%= post.id %></p>
+      </div>
+    <!-- </div> -->
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container center-block">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <h1>Your Post has not been published yet!</h1> -->
+      <%= form_tag "/post", method: :post do %>
+        <input type="text" name="title" placeholder="Title">
+        <textarea name="content" cols="30" rows="10"></textarea> 
+        <input type="submit" value="Submit">
+      <% end %>
+    </div>
+  </div>
+</div>

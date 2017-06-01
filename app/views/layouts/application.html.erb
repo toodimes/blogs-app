@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlogsApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+          <header id="header">
+            <div class="container"><div class="row">
+
+                <a class="navbar-brand" href="/">Crush It<span class="highlight">@</span>50</a>
+
+                <div class="col-sm-12 mainmenu_wrap"><div class="main-menu-icon visible-xs"><span></span><span></span><span></span></div>
+                <ul id="mainmenu" class="menu sf-menu responsive-menu superfish">
+                    <li class="active">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="">Blog</a>
+                        <ul class="dropdown-menu">
+                            <li class="">
+                                <a href="/">Posts</a>
+                            </li>
+                            <li class="">
+                                <a href="/post/new">New Posts</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="">Timetable</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="./trainers.html">Trainers</a>
+                        <ul class="dropdown-menu">
+                            <li class="">
+                                <a href="./trainers.html">Trainers</a>
+                            </li>
+                            <li class="">
+                                <a href="./trainer-single.html">Single Trainer</a>
+                            </li>
+                        </ul>
+                    </li>                                        
+                    <li class="dropdown">
+                        <a href="./404.html">Pages</a>
+                        <ul class="dropdown-menu">
+                            <li class="">
+                                <a href="./blog.html">Blog</a>
+                            </li>
+                            <li class="">
+                                <a href="./blog-single.html">Blog Post</a>
+                            </li>
+                            <li class="">
+                                <a href="./shortcodes.html">Shortcodes</a>
+                            </li>
+                            <li class="">
+                                <a href="./404.html">404</a>
+                            </li>
+                            <li class="">
+                                <a href="./icons.html">Icons</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                  <% if current_user %>
+                    <li>
+                      <%= link_to "Sign Out", "/users/sign_out", method: :delete %>
+                    </li>
+                  <% else %>
+                    <li class="">
+                        <a href="/users/sign_in">Log In</a>
+                    </li>
+                  <% end %>
+
+                </ul>
+            </div>
+
+        </div></div>
+    </header>
+  <!-- <div class="container center-block">
+    <div class="row">
+      <%= form_tag "/users/sign_out", method: :delete do %>
+        <button class="btn btn-danger" type="submit">Sign Out</button>
+      <% end %> 
+      <a href="/users/sign_up"><button class="btn btn-primary">Sign Up</button></a>
+      <a href="/users/sign_in"><button class="btn btn-primary">Sign In</button></a>
+      <a href="/post/new"><button class="btn btn-warning">New Blog Post</button></a> -->
+      <% flash.each do |name, message| %>
+        <div class="alert alert-<%= name %> alert-dismissable" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3><%= message %></h3>
+        </div>
+      <% end %>
+<!--     </div>
+  </div> -->
+
+    <%= yield %>
+  </body>
+</html>
